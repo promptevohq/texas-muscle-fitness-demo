@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Unofficial concept redesign for Texas Muscle & Fitness." />
+  <title>Texas Muscle & Fitness — Concept Demo</title>
+  <style>
+    :root{
+      --bg:#0b0d0f; --panel:#12161a; --text:#f5f5f5; --muted:#b7bcc2;
+      --accent:#ef233c; --line:rgba(255,255,255,.12); --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    .notice{background:#171b20;border-bottom:1px solid var(--line);padding:9px 18px;text-align:center;font-size:12px;color:#cbd0d6}
+    .nav{position:sticky;top:0;z-index:20;background:rgba(11,13,15,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:var(--max);margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.5px}
+    .brand-mark{width:38px;height:38px;border:2px solid var(--accent);display:grid;place-items:center;font-weight:900;transform:skew(-8deg)}
+    .brand small{display:block;color:#aeb4ba;font-size:10px;letter-spacing:1.8px}
+    .links{display:flex;gap:26px;font-size:13px;font-weight:800;text-transform:uppercase}
+    .links a:hover{color:var(--accent)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;background:var(--accent);border-radius:5px;font-weight:900;text-transform:uppercase;font-size:12px;letter-spacing:.7px}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.35)}
+    .hero{min-height:680px;display:flex;align-items:center;position:relative;overflow:hidden;
+      background:
+      linear-gradient(90deg,rgba(5,7,9,.96) 0%,rgba(5,7,9,.82) 42%,rgba(5,7,9,.25) 100%),
+      radial-gradient(circle at 75% 40%,rgba(239,35,60,.28),transparent 28%),
+      linear-gradient(135deg,#171b20,#08090a);}
+    .hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(11,13,15,1),transparent 18%)}
+    .hero-inner{max-width:var(--max);width:100%;margin:auto;padding:100px 22px;position:relative;z-index:2}
+    .eyebrow{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+    h1{font-size:clamp(48px,7vw,92px);line-height:.92;max-width:800px;letter-spacing:-3px;text-transform:uppercase}
+    h1 span{color:var(--accent)}
+    .hero p{max-width:610px;color:#d1d5d9;margin:24px 0 30px;font-size:18px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .stats{background:#101418;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .stats-inner{max-width:var(--max);margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
+    .stat{padding:26px 22px;border-right:1px solid var(--line);text-transform:uppercase;font-weight:900;font-size:12px;letter-spacing:.6px}
+    .stat:last-child{border-right:0}
+    .stat strong{display:block;color:var(--accent);font-size:26px;margin-bottom:4px}
+    section{padding:90px 22px}
+    .container{max-width:var(--max);margin:auto}
+    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:38px}
+    .section-head h2{font-size:clamp(34px,5vw,56px);line-height:1;text-transform:uppercase;letter-spacing:-1.5px}
+    .section-head p{max-width:520px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--panel);border:1px solid var(--line);padding:28px;border-radius:8px}
+    .card .icon{font-size:30px;color:var(--accent);margin-bottom:18px}
+    .card h3{text-transform:uppercase;font-size:18px;margin-bottom:9px}
+    .card p{color:var(--muted);font-size:14px}
+    .split{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch}
+    .visual{min-height:480px;background:
+      linear-gradient(135deg,rgba(239,35,60,.35),rgba(0,0,0,.15)),
+      repeating-linear-gradient(90deg,#15191d 0 35px,#20252a 35px 38px);
+      position:relative;overflow:hidden}
+    .visual:before{content:"MUSCLE\n& FITNESS";white-space:pre;position:absolute;inset:auto 8% 8%;font-size:clamp(42px,6vw,76px);font-weight:1000;line-height:.82;color:rgba(255,255,255,.9)}
+    .copy{background:#f2f2f0;color:#0b0d0f;padding:55px}
+    .copy .eyebrow{color:var(--accent)}
+    .copy h2{font-size:clamp(35px,5vw,58px);line-height:.95;text-transform:uppercase;margin-bottom:20px}
+    .copy p{color:#444b52;margin-bottom:24px}
+    .copy ul{list-style:none;margin-bottom:28px}
+    .copy li{padding:10px 0;border-bottom:1px solid #d9d9d5;font-weight:800}
+    .copy li:before{content:"✓";color:var(--accent);margin-right:10px}
+    .cta{background:linear-gradient(90deg,#11161a,#0b0d0f);border-block:1px solid var(--line)}
+    .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+    .cta h2{font-size:clamp(34px,5vw,60px);line-height:.95;text-transform:uppercase}
+    .cta h2 span{color:var(--accent)}
+    .quote{background:#f2f2f0;color:#111}
+    .quote .card{background:#fff;border-color:#e2e2e2}
+    .quote .card p{color:#555}
+    .quote .name{font-weight:900;margin-top:18px;text-transform:uppercase;font-size:12px}
+    .contact{background:#0f1317}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .contact-box{border:1px solid var(--line);padding:32px;background:#12171b}
+    .contact-box h3{text-transform:uppercase;margin-bottom:12px}
+    .contact-box p{color:var(--muted)}
+    footer{border-top:1px solid var(--line);padding:28px 22px;color:#8e969e;font-size:12px}
+    .footer-inner{max-width:var(--max);margin:auto;display:flex;justify-content:space-between;gap:20px}
+    @media(max-width:850px){
+      .links{display:none}.stats-inner{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}
+      .split,.contact-grid{grid-template-columns:1fr}.visual{min-height:320px}.copy{padding:36px 24px}
+      .cta-inner{flex-direction:column;align-items:flex-start}.hero{min-height:600px}
+    }
+    @media(max-width:520px){
+      .stats-inner{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--line)}
+      h1{letter-spacing:-1.5px}.hero p{font-size:16px}.footer-inner{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="notice">UNOFFICIAL CONCEPT REDESIGN • DEMO FOR PRESENTATION PURPOSES</div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#">
+        <div class="brand-mark">TX</div>
+        <div>TEXAS<br><small>MUSCLE & FITNESS</small></div>
+      </a>
+      <div class="links">
+        <a href="#membership">Membership</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#why">Why Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn" href="https://texasmusclefitness.gymmasteronline.com/portal/signup" target="_blank" rel="noopener">Join Now →</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Texas Muscle & Fitness</div>
+      <h1>Get stronger.<br>Get fitter.<br><span>Get started.</span></h1>
+      <p>A focused, modern web experience designed to showcase the gym first and guide interested visitors naturally toward membership.</p>
+      <div class="actions">
+        <a class="btn" href="https://texasmusclefitness.gymmasteronline.com/portal/signup" target="_blank" rel="noopener">Join Now →</a>
+        <a class="btn secondary" href="#facilities">Explore the Gym</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat"><strong>01</strong>Quality equipment</div>
+      <div class="stat"><strong>02</strong>Supportive community</div>
+      <div class="stat"><strong>03</strong>All fitness levels</div>
+      <div class="stat"><strong>04</strong>Clear path to join</div>
+    </div>
+  </div>
+
+  <section id="membership">
+    <div class="container split">
+      <div class="visual" aria-label="Concept gym visual"></div>
+      <div class="copy">
+        <div class="eyebrow">Membership</div>
+        <h2>A membership that fits you</h2>
+        <p>A dedicated membership section makes the next step obvious without replacing the existing signup system.</p>
+        <ul>
+          <li>Simple membership journey</li>
+          <li>Clear calls to action</li>
+          <li>Mobile-first experience</li>
+          <li>Direct link to existing signup</li>
+        </ul>
+        <a class="btn" href="https://texasmusclefitness.gymmasteronline.com/portal/signup" target="_blank" rel="noopener">Join Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="facilities">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Facilities</div>
+          <h2>Built around the gym</h2>
+        </div>
+        <p>A stronger website can turn the gym's physical strengths into a clear online first impression.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon">▰</div><h3>Strength Equipment</h3><p>Highlight the equipment and training environment so visitors know what to expect before they arrive.</p></article>
+        <article class="card"><div class="icon">◈</div><h3>Training Space</h3><p>Use strong visuals and concise information to communicate the atmosphere and available space.</p></article>
+        <article class="card"><div class="icon">✦</div><h3>Community</h3><p>Give the gym's personality a prominent place instead of sending every visitor directly to a signup portal.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Why choose us</div>
+          <h2>More than just a gym</h2>
+        </div>
+        <p>Clear sections help a first-time visitor understand the value of the gym before asking them to join.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon">★</div><h3>Welcoming</h3><p>Make the experience approachable for beginners and experienced members alike.</p></article>
+        <article class="card"><div class="icon">↗</div><h3>Goal focused</h3><p>Keep the page focused on the outcomes and experience visitors are looking for.</p></article>
+        <article class="card"><div class="icon">✓</div><h3>Easy to act</h3><p>Put the membership action where visitors naturally expect it throughout the page.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta-inner">
+      <div>
+        <div class="eyebrow">Ready to start?</div>
+        <h2>Take the first step <span>today.</span></h2>
+      </div>
+      <a class="btn" href="https://texasmusclefitness.gymmasteronline.com/portal/signup" target="_blank" rel="noopener">Join Now →</a>
+    </div>
+  </section>
+
+  <section class="quote">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">Member stories</div><h2>What members say</h2></div>
+        <p>Placeholder testimonials are shown only as layout examples. Real member reviews should replace them before launch.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><p>“Great environment and a strong community. This layout gives member stories a much bigger role.”</p><div class="name">Sample testimonial</div></article>
+        <article class="card"><p>“A clear, mobile-friendly path makes it easier for visitors to learn about the gym and take action.”</p><div class="name">Sample testimonial</div></article>
+        <article class="card"><p>“Real reviews, real photos and real information can be added here before the site goes live.”</p><div class="name">Sample testimonial</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">Visit us</div><h2>Location & hours</h2></div>
+        <p>Replace these placeholders with the gym's confirmed address, hours and contact information before publishing.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-box"><h3>Converse / San Antonio Area</h3><p>Official address and directions can be added here.</p></div>
+        <div class="contact-box"><h3>Membership</h3><p>Visitors can be sent directly to the existing GymMaster signup portal.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>Texas Muscle & Fitness — concept redesign</span>
+      <span>Unofficial demo • Not commissioned by the business</span>
+    </div>
+  </footer>
+</body>
+</html>
